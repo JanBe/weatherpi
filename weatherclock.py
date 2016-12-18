@@ -19,10 +19,10 @@ def get_wunderground_data(api_key, feature, country, city):
     else:
         return {}
 
-def forecast_text_for_today(weather_forecast):
-    day = weather_forecast['forecast']['txt_forecast']['forecastday'][0]
+def weather_text_for_today(weather):
+    day = weather['forecast']['txt_forecast']['forecastday'][0]
     day_text = day['title'] +': '+ day['fcttext_metric']
-    night = weather_forecast['forecast']['txt_forecast']['forecastday'][1]
+    night = weather['forecast']['txt_forecast']['forecastday'][1]
     night_text = night['title'] +': '+ night['fcttext_metric']
     return  day_text +' '+ night_text
 
@@ -47,19 +47,19 @@ def current_time():
 def run(api_key, country, city):
     scrollphat.set_brightness(2)
     scrollphat.set_rotate(True)
-    weather_forecast = {}
+    weather = {}
     astronomy = {}
     forecast_refresh_time = time.time()
     while True:
         try:
             if forecast_refresh_time < time.time():
-                new_weather_forecast = get_wunderground_data(api_key, 'forecast', country, city)
+                new_weather = get_wunderground_data(api_key, 'forecast', country, city)
                 new_astronomy = get_wunderground_data(api_key, 'astronomy', country, city)
 
-                if(new_weather_forecast == {} or new_astronomy == {}):
+                if(new_weather == {} or new_astronomy == {}):
                     forecast_refresh_time = time.time()
                 else:
-                    weather_forecast = new_weather_forecast
+                    weather = new_weather
                     astronomy = new_astronomy
                     forecast_refresh_time = time.time() + 60 * 60
 
@@ -68,8 +68,8 @@ def run(api_key, country, city):
             time.sleep(60)
 
             # Scroll forecast once
-            if(weather_forecast != {} and astronomy != {}):
-                scrollphat.write_string(sunrise_and_sunset_text(astronomy) +' '+ forecast_text_for_today(weather_forecast))
+            if(weather != {} and astronomy != {}):
+                scrollphat.write_string(sunrise_and_sunset_text(astronomy) +' '+ weather_text_for_today(weather))
                 length = scrollphat.buffer_len()
 
                 for i in range(length):
