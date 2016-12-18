@@ -39,7 +39,7 @@ def sunrise_and_sunset_text(astronomy):
 def current_time():
     current_time = time.localtime()
     hours = '%X' % (current_time.tm_hour % 12)
-    minutes = current_time.tm_min
+    minutes = '%02d' % current_time.tm_min
     return hours + minutes
 
 # Display the current time for 60 seconds, scroll the forecast, go back to the current time
