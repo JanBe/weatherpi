@@ -19,7 +19,7 @@ def get_wunderground_data(api_key, feature, country, city):
     else:
         return {}
 
-def weather_text_for_today(weather):
+def weather_text(weather):
     day = weather['forecast']['txt_forecast']['forecastday'][0]
     day_text = day['title'] +': '+ day['fcttext_metric']
     night = weather['forecast']['txt_forecast']['forecastday'][1]
@@ -30,6 +30,9 @@ def sunrise_and_sunset_text(astronomy):
     sunrise = astronomy['sun_phase']['sunrise']
     sunset = astronomy['sun_phase']['sunset']
     return 'Sunrise: '+ sunrise['hour'] +':'+ sunrise['minute'] +', Sunset: '+ sunset['hour'] +':'+ sunset['minute'] +'.'
+
+def forecast_text(astronomy, weather):
+    sunrise_and_sunset_text(astronomy) +' '+ weather_text(weather)
 
 # Returns the current time in a mixed hexadecimal and decimal representation.
 # The hours are between 0 and 12. For hours > 9, hexadecimal representation is used.
@@ -69,7 +72,7 @@ def run(api_key, country, city):
 
             # Scroll forecast once
             if(weather != {} and astronomy != {}):
-                scrollphat.write_string(sunrise_and_sunset_text(astronomy) +' '+ weather_text_for_today(weather))
+                scrollphat.write_string(forecast_text(astronomy, weather))
                 length = scrollphat.buffer_len()
 
                 for i in range(length):
