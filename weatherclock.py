@@ -32,7 +32,7 @@ def sunrise_and_sunset_text(astronomy):
     return 'Sunrise: '+ sunrise['hour'] +':'+ sunrise['minute'] +', Sunset: '+ sunset['hour'] +':'+ sunset['minute'] +'.'
 
 def forecast_text(astronomy, weather):
-    sunrise_and_sunset_text(astronomy) +' '+ weather_text(weather)
+    return '   '+ sunrise_and_sunset_text(astronomy) +' '+ weather_text(weather)
 
 # Returns the current time in a mixed hexadecimal and decimal representation.
 # The hours are between 0 and 12. For hours > 9, hexadecimal representation is used.
