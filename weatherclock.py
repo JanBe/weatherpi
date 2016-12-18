@@ -65,7 +65,7 @@ def run(api_key, country, city):
 
             # Display current time for 60 seconds
             scrollphat.write_string(current_time())
-            sleep(60)
+            time.sleep(60)
 
             # Scroll forecast once
             if(weather_forecast != {} and astronomy != {}):
