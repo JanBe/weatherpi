@@ -34,6 +34,14 @@ def sunrise_and_sunset_text(astronomy):
 def forecast_text(astronomy, weather):
     return '   '+ sunrise_and_sunset_text(astronomy) +' '+ weather_text(weather)
 
+def attention_flash():
+    for x in range(1, 3):
+        scrollphat.write_string('!!!')
+        time.sleep(0.5)
+        scrollphat.write_string('   ')
+        time.sleep(0.5)
+
+
 # Returns the current time in a mixed hexadecimal and decimal representation.
 # The hours are between 0 and 12. For hours > 9, hexadecimal representation is used.
 # Minutes are displayed in the decimal system. No symbol seperates hours and minutes.
@@ -72,6 +80,7 @@ def run(api_key, country, city):
 
             # Scroll forecast once
             if(weather != {} and astronomy != {}):
+                attention_flash()
                 scrollphat.write_string(forecast_text(astronomy, weather))
                 length = scrollphat.buffer_len()
 
