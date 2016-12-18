@@ -77,7 +77,7 @@ def run(api_key, country, city):
 
                 for i in range(length):
                     scrollphat.scroll()
-                    time.sleep(0.1)
+                    time.sleep(0.05)
 
         except KeyboardInterrupt:
             scrollphat.clear()
