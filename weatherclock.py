@@ -35,11 +35,11 @@ def forecast_text(astronomy, weather):
     return '   '+ sunrise_and_sunset_text(astronomy) +' '+ weather_text(weather)
 
 def attention_flash():
-    for x in range(1, 3):
-        scrollphat.write_string('!!!')
-        time.sleep(0.5)
-        scrollphat.write_string('   ')
-        time.sleep(0.5)
+    for x in range(0, 3):
+        scrollphat.write_string('    ')
+        time.sleep(0.7)
+        scrollphat.write_string('!!!!!!')
+        time.sleep(0.7)
 
 
 # Returns the current time in a mixed hexadecimal and decimal representation.
